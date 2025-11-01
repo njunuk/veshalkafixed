@@ -27,7 +27,7 @@ int main()
 		while (file >> word) {
 			string deword = "";
 			for (int i = 0; i < word.length(); i++) {
-				deword += char((word[i] - 'a' - 3 + 26) % 26 + 'a');
+				deword += char((word[i] - 'a' - 7 + 26) % 26 + 'a');
 			}
 			words.push_back(deword);
 		}
@@ -71,6 +71,21 @@ int main()
 			auto milliduration = chrono::duration_cast<chrono::milliseconds>(endT - startT);
 
 			cout << "|---<=| You won! |=>---|" << endl;
+			cout << "|- Tries: " << tries << endl;
+			cout << "|- Wrong tries: " << wrongTries << endl;
+			cout << "|- Letters you tried: ";
+			for (char c : choices) cout << c << ' ';
+			cout << endl;
+			cout << "|- Word: " << randWord << endl;
+			cout << "|- Time taken: " << secondduration.count() << "." << milliduration.count() << " seconds" << endl;
+			end = true;
+		}
+		else if (wrongTries >= 8) {
+			auto endT = chrono::high_resolution_clock::now();
+			auto secondduration = chrono::duration_cast<chrono::seconds>(endT - startT);
+			auto milliduration = chrono::duration_cast<chrono::milliseconds>(endT - startT);
+
+			cout << "|---<=| You lost! |=>---|" << endl;
 			cout << "|- Tries: " << tries << endl;
 			cout << "|- Wrong tries: " << wrongTries << endl;
 			cout << "|- Letters you tried: ";
